@@ -1,0 +1,127 @@
+main{
+  max-width: 60%;
+  margin: -27px auto 0;
+}
+
+.createTask{
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.createTask input {
+  height: 54px;
+  border-radius: 8px;
+  border: 0;
+  padding: 0 1rem;
+  width: 100%;
+  color: var(--gray-300);
+  background-color: var(--gray-500);
+}
+
+.createTask button{
+  background-color: var(--blue-600);
+  color: var(--gray-100);
+  border: 0;
+  width: 90px;
+  height: 54px;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 8px;
+  padding: 7px;
+  cursor: pointer;
+}
+
+.tasksInfo{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1.2rem;
+}
+
+.taskEmptyList{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+
+  border-top: 1px solid var(--gray-500);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.taskEmptyList svg{
+  opacity: 0.5;
+  margin-bottom: .5rem;
+}
+
+.taskEmptyList p{
+  color: var(--gray-300);
+}
+
+.taskEmptyList p:first-of-type{
+  font-weight: bold;
+}
+
+.tasksCreated,
+.tasksCompleted{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tasksCreated span:first-of-type{
+  color: var(--blue-300);
+  font-weight: bold;
+}
+
+.tasksCompleted span:first-of-type{
+  color: var(--purple-500);
+  font-weight: bold;
+}
+
+.tasksCreated span:last-child,
+.tasksCompleted span:last-child{
+  background-color: var(--gray-400);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 8px;
+  width: 25px;
+  height: 19px;
+  border-radius: 100%;
+  font-size: 12px;
+}
+
+
+input[type=checkbox] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* create custom checkbox appearance */
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  /* background-color only for content */
+  background-clip: content-box;
+  border-radius: 6px;
+  border: solid 2px var(--blue-300);
+  border-radius: 100%;
+
+  transition: all 0.5s;
+}
+
+input[type=checkbox]:checked{
+  border: none;
+  background-color: var(--purple-500);
+}
+
+
+
+input[type=checkbox]:focus{
+  outline: none !important;
+}
