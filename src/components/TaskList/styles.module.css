@@ -1,3 +1,101 @@
 .taskList{
   
 }
+
+.taskListItem{
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  background-color: var(--gray-400);
+  color: var(--gray-200);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  flex-direction: row;
+  align-items: flex-start;
+  height: 72px;
+  border: 1px solid var(--gray-400);
+  border-radius: 8px;
+
+  position: relative;
+}
+
+.taskListItemCompleted{
+  text-decoration: line-through;
+  color: var(--gray-300);
+}
+
+.taskListItem span {
+  flex: 95%;
+}
+
+.taskListItem button{
+  border: none;
+  background: none;
+  color: var(--gray-300);
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translate(0, -50%);
+  cursor: pointer;
+}
+
+
+.emptyTaskList{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+
+  border-top: 1px solid var(--gray-500);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.emptyTaskList svg{
+  opacity: 0.5;
+  margin-bottom: .5rem;
+}
+
+.emptyTaskList p{
+  color: var(--gray-300);
+}
+
+.emptyTaskList p:first-of-type{
+  font-weight: bold;
+}
+
+input[type=checkbox] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-clip: content-box;
+  border-radius: 6px;
+  border: solid 2px var(--blue-300);
+  border-radius: 100%;
+
+  transition: all 0.5s;
+}
+
+input[type=checkbox]:checked{
+  border: none;
+  background-color: var(--purple-500);
+  position: relative;
+}
+
+input[type=checkbox]:checked::after{
+  content: '';
+  background: url(../../assets/iconChecked.svg) no-repeat center center;
+  background-size: 17px;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 0;
+  left: 0;
+}
+
+input[type=checkbox]:focus{
+  outline: none !important;
+}

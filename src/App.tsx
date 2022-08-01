@@ -2,12 +2,13 @@ import { ChangeEvent, FormEvent, InvalidEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { Header } from "./components/Header";
-import { PlusCircle, ClipboardText } from "phosphor-react";
+import { PlusCircle } from "phosphor-react";
 
 import styles from "./App.module.css";
 
 import "./global.css";
 import { TaskList } from "./components/TaskList";
+import { EmptyTaskList } from "./components/TaskList/emptyTaskList";
 
 interface Task {
   id: string;
@@ -18,7 +19,8 @@ interface Task {
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTask, setNewTask] = useState("");
-  const [taskCount, setTaskCount] = useState(tasks.length);
+  const [taskCount, setTaskCount] = useState(0);
+  const [isChecked, setIsChecked] = useState(false);
 
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault();
@@ -36,8 +38,6 @@ function App() {
     });
 
     setNewTask("");
-
-    console.log(tasks);
   }
 
   function handleTaskInvalid(event: InvalidEvent<HTMLInputElement>) {
@@ -49,26 +49,30 @@ function App() {
     setNewTask(event.target.value);
   }
 
-  console.log(tasks);
+  function handleTaskToggle(id: string) {
+    let newTaskList = [];
+    newTaskList = tasks;
 
-  function handleTaskCompleted(id: string) {
-    // const taskCompleted = tasks.map((task) =>
-    //   task.id === id ? (task.isCompleted = !task.isCompleted) : task
-    // );
-
-    const taskCompleted = tasks.map((task) => {
-      return task.id === id ? (task.isCompleted = !task.isCompleted) : task;
+    const taskCompletedIndex = tasks.findIndex((task) => {
+      return task.id === id;
     });
 
-    console.log(taskCompleted);
+    tasks.map((task) => {
+      return task.isCompleted === true
+        ? setIsChecked(false)
+        : setIsChecked(true);
+    });
 
-    setTasks(taskCompleted);
+    newTaskList[taskCompletedIndex].isCompleted = isChecked;
+
+    setTasks(newTaskList);
   }
 
   function handleRemoveTask(id: string) {
     const removeTask = tasks.filter((task) => task.id !== id);
 
     setTasks(removeTask);
+    setTaskCount(tasks.length);
   }
 
   return (
@@ -100,19 +104,15 @@ function App() {
           </div>
         </div>
 
-        <div className={styles.taskEmptyList}>
-          <ClipboardText size={56} />
-          <p>Você ainda não tem tarefas cadastradas</p>
-          <p>Crie tarefas e organize seus itens a fazer</p>
-        </div>
-
-        <div>
+        {tasks.length !== 0 ? (
           <TaskList
             tasks={tasks}
             handleRemoveTask={handleRemoveTask}
-            handleTaskCompleted={handleTaskCompleted}
+            handleTaskToggle={handleTaskToggle}
           />
-        </div>
+        ) : (
+          <EmptyTaskList />
+        )}
       </main>
     </>
   );

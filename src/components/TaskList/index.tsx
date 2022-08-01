@@ -1,25 +1,45 @@
-import { Check, Trash } from "phosphor-react";
+import { Trash } from "phosphor-react";
 import styles from "./styles.module.css";
 
-export function TaskList({ tasks, handleRemoveTask, handleTaskCompleted }) {
+interface Task {
+  id: string;
+  content: string;
+  isCompleted: boolean;
+}
+
+interface TaskListProps {
+  tasks: Task[];
+  handleRemoveTask: (id: string) => void;
+  handleTaskToggle: (id: string) => void;
+}
+
+export function TaskList({
+  tasks,
+  handleRemoveTask,
+  handleTaskToggle,
+}: TaskListProps) {
   return (
     <div className={styles.taskList}>
-      {tasks.map((task) => {
+      {tasks.map(({ id, content, isCompleted }) => {
         return (
-          <div key={task.id} className={styles.taskList}>
+          <div key={Math.random()} className={styles.taskListItem}>
             <label className={styles.taskCompleted}>
               <input
                 type="checkbox"
                 readOnly
-                checked={task.isCompleted}
-                onClick={() => handleTaskCompleted(task.id)}
-                value={task.content}
+                checked={isCompleted}
+                onClick={() => handleTaskToggle(id)}
               />
-              {/* {taskCompleted && <Check size={23} />} */}
-              <span>{task.content}</span>
             </label>
+            <span
+              className={
+                isCompleted === true ? styles.taskListItemCompleted : ""
+              }
+            >
+              {content}
+            </span>
 
-            <button onClick={() => handleRemoveTask(task.id)}>
+            <button onClick={() => handleRemoveTask(id)}>
               <Trash size={24} />
             </button>
           </div>
