@@ -19,7 +19,6 @@ interface Task {
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTask, setNewTask] = useState("");
-  const [taskCount, setTaskCount] = useState(0);
   const [isChecked, setIsChecked] = useState(false);
 
   function handleCreateNewTask(event: FormEvent) {
@@ -32,10 +31,6 @@ function App() {
     };
 
     setTasks([...tasks, createNewTask]);
-
-    setTaskCount((stage) => {
-      return stage + 1;
-    });
 
     setNewTask("");
   }
@@ -50,20 +45,13 @@ function App() {
   }
 
   function handleTaskToggle(id: string) {
-    let newTaskList = [];
-    newTaskList = tasks;
-
-    const taskCompletedIndex = tasks.findIndex((task) => {
-      return task.id === id;
+    const taskIndex = tasks.findIndex((task) => {
+      return task.id == id;
     });
 
-    tasks.map((task) => {
-      return task.isCompleted === true
-        ? setIsChecked(false)
-        : setIsChecked(true);
-    });
+    const newTaskList = [...tasks];
 
-    newTaskList[taskCompletedIndex].isCompleted = isChecked;
+    newTaskList[taskIndex].isCompleted = !newTaskList[taskIndex].isCompleted;
 
     setTasks(newTaskList);
   }
@@ -72,8 +60,9 @@ function App() {
     const removeTask = tasks.filter((task) => task.id !== id);
 
     setTasks(removeTask);
-    setTaskCount(tasks.length);
   }
+
+  const taskCompleted = tasks.filter((task) => task.isCompleted);
 
   return (
     <>
@@ -96,11 +85,13 @@ function App() {
 
         <div className={styles.tasksInfo}>
           <div className={styles.tasksCreated}>
-            <span>Tarefas criadas</span> <span>{taskCount}</span>
+            <span>Tarefas criadas</span>{" "}
+            <span>{tasks.length !== 0 ? tasks.length : 0}</span>
           </div>
 
           <div className={styles.tasksCompleted}>
-            <span>concluidas</span> <span>0</span>
+            <span>concluidas</span>{" "}
+            <span>{`${taskCompleted.length} de ${tasks.length}`}</span>
           </div>
         </div>
 

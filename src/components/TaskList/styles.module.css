@@ -75,6 +75,7 @@ input[type=checkbox] {
   border-radius: 6px;
   border: solid 2px var(--blue-300);
   border-radius: 100%;
+  cursor: pointer;
 
   transition: all 0.5s;
 }
