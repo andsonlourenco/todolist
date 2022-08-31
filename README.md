@@ -7,3 +7,5 @@ install project
 start project
 
 `npm run dev`
+
+<img src="./.github/to-do-list.png" />

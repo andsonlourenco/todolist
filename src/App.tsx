@@ -74,23 +74,23 @@ function App() {
             onChange={handleNewTaskChange}
             type="text"
             value={newTask}
-            placeholder="Adicione uma nova tarefa"
+            placeholder="Add a new task"
             onInvalid={handleTaskInvalid}
             required
           />
           <button>
-            Criar <PlusCircle size={16} />
+            Add <PlusCircle size={16} />
           </button>
         </form>
 
         <div className={styles.tasksInfo}>
           <div className={styles.tasksCreated}>
-            <span>Tarefas criadas</span>{" "}
+            <span>Created tasks</span>{" "}
             <span>{tasks.length !== 0 ? tasks.length : 0}</span>
           </div>
 
           <div className={styles.tasksCompleted}>
-            <span>concluidas</span>{" "}
+            <span>Concluded</span>{" "}
             <span>{`${taskCompleted.length} de ${tasks.length}`}</span>
           </div>
         </div>
